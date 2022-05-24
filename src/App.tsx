@@ -1,69 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import styles from './App.module.css';
-import {
-  Layout,
-  Typography,
-  Input,
-  Menu,
-  Button,
-  Dropdown
-} from "antd"
-import { GlobalOutlined } from '@ant-design/icons'
-const {Header,Footer} = Layout
+import React from "react";
+import styles from "./App.module.css";
+
+import { Header, Footer, SideMenu, Carousel,ProducetCollection } from "./components";
+import { Row, Col, Typography } from "antd";
+// 产品推荐列表
+import {productList1,productList2,productList3} from './mockup'
+// 侧边展示图片
+import sideImage1 from './assets/images/sider_2019_02-04-2.png'
+import sideImage2 from './assets/images/sider_2019_02-04.png'
+import sideImage3 from './assets/images/sider_2019_12-09.png'
 function App() {
   return (
     <div className={styles.App}>
-      <div className={styles['app-header']}>
-        {/* top-header */}
-        <div className={styles['top-header']}>
-          <div className={styles.inner}>
-            <Typography.Text>让旅游更幸福</Typography.Text>
-            <Dropdown.Button
-              style={{marginLeft:15}}
-              overlay={
-                <Menu >
-                  <Menu.Item>中文</Menu.Item>
-                  <Menu.Item>English</Menu.Item>
-                </Menu>
-              }
-              icon={<GlobalOutlined/>}
-            >
-              语言
-            </Dropdown.Button>
-            <Button.Group className={styles['button-group']}>
-              <Button>注册</Button>
-              <Button>登录</Button>
-            </Button.Group>
-          </div>
-        </div>
-        <Header className={styles['main-header']}>
-          <img src={logo} alt="" className={styles['App-logo']}/>
-          <Typography.Title level={3} className={styles.title}>React旅游网</Typography.Title>
-          <Input.Search
-            placeholder='请输入旅游目的地、主题或关键字'
-            className={styles['search-input']}
-          />
-        </Header>
-        <Menu mode={"horizontal"} className={styles['main-menu']}>
-          <Menu.Item key={1}>旅游首页 </Menu.Item>
-          <Menu.Item key={2}>周末游 </Menu.Item>
-          <Menu.Item key={3}>跟团游 </Menu.Item>
-          <Menu.Item key={4}>自由行 </Menu.Item>
-          <Menu.Item key={5}>XXXX </Menu.Item>
-          <Menu.Item key={6}>XXXX </Menu.Item>
-          <Menu.Item key={7}>XXXX </Menu.Item>
-          <Menu.Item key={8}>XXXX </Menu.Item>
-          <Menu.Item key={9}>XXXX </Menu.Item>
-          <Menu.Item key={10}>XXXX </Menu.Item>
-          <Menu.Item key={11}>XXXX </Menu.Item>
-        </Menu>
+      <Header />
+      {/* 页面content */}
+      <div className={styles["page-content"]}>
+        <Row style={{ marginTop: 20 }}>
+          <Col span={6}>
+            <SideMenu />
+          </Col>
+          <Col span={18}>
+            <Carousel />
+          </Col>
+        </Row>
+        {/*  推荐列表组件  */}
+        <ProducetCollection 
+          title={<Typography.Title level={3} type={"warning"}>爆款推荐</Typography.Title>}
+          sideImage={sideImage1}
+          products={productList1}
+        />
+        <ProducetCollection 
+          title={<Typography.Title level={3} type={"danger"}>新品上市</Typography.Title>}
+          sideImage={sideImage2}
+          products={productList2}
+        />
+        <ProducetCollection 
+          title={<Typography.Title level={3} type={"success"}>国内游与i见 </Typography.Title>}
+          sideImage={sideImage3}
+          products={productList3}
+        />
       </div>
-      <Footer>
-        <Typography.Title level={3} style={{textAlign:'center'}}>
-          版权所有 @ React旅游网
-        </Typography.Title>
-      </Footer>
+      <Footer />
     </div>
   );
 }
