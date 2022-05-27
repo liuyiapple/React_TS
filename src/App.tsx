@@ -1,46 +1,38 @@
 import React from "react";
 import styles from "./App.module.css";
-
-import { Header, Footer, SideMenu, Carousel,ProducetCollection } from "./components";
-import { Row, Col, Typography } from "antd";
-// 产品推荐列表
-import {productList1,productList2,productList3} from './mockup'
-// 侧边展示图片
-import sideImage1 from './assets/images/sider_2019_02-04-2.png'
-import sideImage2 from './assets/images/sider_2019_02-04.png'
-import sideImage3 from './assets/images/sider_2019_12-09.png'
+import {HomePage,SignIn,Register} from "./pages"
+import { BrowserRouter,Route,Switch } from "react-router-dom"
 function App() {
   return (
     <div className={styles.App}>
-      <Header />
-      {/* 页面content */}
-      <div className={styles["page-content"]}>
-        <Row style={{ marginTop: 20 }}>
-          <Col span={6}>
-            <SideMenu />
-          </Col>
-          <Col span={18}>
-            <Carousel />
-          </Col>
-        </Row>
-        {/*  推荐列表组件  */}
-        <ProducetCollection 
-          title={<Typography.Title level={3} type={"warning"}>爆款推荐</Typography.Title>}
-          sideImage={sideImage1}
-          products={productList1}
-        />
-        <ProducetCollection 
-          title={<Typography.Title level={3} type={"danger"}>新品上市</Typography.Title>}
-          sideImage={sideImage2}
-          products={productList2}
-        />
-        <ProducetCollection 
-          title={<Typography.Title level={3} type={"success"}>国内游与i见 </Typography.Title>}
-          sideImage={sideImage3}
-          products={productList3}
-        />
-      </div>
-      <Footer />
+
+
+    {/* 
+        完整页面会使用 <BrowserRouter/> + <Route /> + <Switch/>
+    */}
+
+
+      <BrowserRouter>
+      {/* 使用switch 这个组件包裹路由组件的时候，当路由组件没有exact时，会优先选择渲染权重最高的路由页面 */}
+        <Switch>
+
+          {/* 这里当没有exact 这个 精确匹配的时候，页面就会被全部渲染到一个页面上去 */}
+          <Route exact path="/" component={HomePage}/>
+
+          {/* 这里尽管还没有 /signIn 这个对应路径的组件 可以使用render来渲染一个  */}
+          {/* <Route path={"/signIn"} render={() => <h1>Login</h1>} /> */}
+          
+          {/* 登录 */}
+          <Route path={"/signIn"} component={ SignIn }/>
+
+          {/* 注册 */}
+          <Route path={"/register"} component={Register}/>
+
+          {/*  404 页面 ，不指定路由 */}
+          <Route render={() => <h1>404页面 你找的网页我们正在努力开发中</h1>} />
+        </Switch>
+      </BrowserRouter>
+
     </div>
   );
 }

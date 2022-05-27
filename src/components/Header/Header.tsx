@@ -3,7 +3,17 @@ import styles from "./header.module.css";
 import logo from "../../assets/logo.svg";
 import { Layout, Typography, Input, Menu, Button, Dropdown } from "antd";
 import { GlobalOutlined } from "@ant-design/icons";
+// 导入 hooks 
+import { useHistory,useParams,useRouteMatch,useLocation } from "react-router-dom"
 export const Header = () => {
+  const history = useHistory() 
+  const parmas = useParams() //  获取当前页面传递过来的参数
+  const match = useRouteMatch() // 
+  const location = useLocation()
+  console.log(parmas); 
+  console.log(match);
+  console.log(location);
+  
  return <div className={styles["app-header"]}>
     {/* top-header */}
     <div className={styles["top-header"]}>
@@ -22,16 +32,18 @@ export const Header = () => {
           语言
         </Dropdown.Button>
         <Button.Group className={styles["button-group"]}>
-          <Button>注册</Button>
-          <Button>登录</Button>
+          <Button onClick={() => history.push("register")}>注册</Button>
+          <Button onClick={() => history.push("signIn")}>登录</Button>
         </Button.Group>
       </div>
     </div>
     <Layout.Header className={styles["main-header"]}>
+    <span onClick={() => history.push("/")}>
       <img src={logo} alt="" className={styles["App-logo"]} />
-      <Typography.Title level={3} className={styles.title}>
-        React旅游网
-      </Typography.Title>
+        <Typography.Title level={3} className={styles.title}>
+          React旅游网
+        </Typography.Title>
+    </span>
       <Input.Search
         placeholder="请输入旅游目的地、主题或关键字"
         className={styles["search-input"]}
