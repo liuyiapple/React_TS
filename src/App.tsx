@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./App.module.css";
-import {HomePage,SignIn,Register} from "./pages"
+import {HomePage,SignIn,Register,DetailPage} from "./pages"
 import { BrowserRouter,Route,Switch } from "react-router-dom"
 function App() {
   return (
@@ -27,7 +27,8 @@ function App() {
 
           {/* 注册 */}
           <Route path={"/register"} component={Register}/>
-
+          {/* 详情页面 */}
+          <Route path={`/detail/:touristRouteId`} component={DetailPage}></Route>
           {/*  404 页面 ，不指定路由 */}
           <Route render={() => <h1>404页面 你找的网页我们正在努力开发中</h1>} />
         </Switch>
