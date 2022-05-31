@@ -1,4 +1,4 @@
-### 基于React  18  TypeScript 项目和
+### 基于React  18 和 TypeScript 项目
 
 ### 项目初始化
 
